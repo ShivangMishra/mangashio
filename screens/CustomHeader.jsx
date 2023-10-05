@@ -1,21 +1,31 @@
-import { Image, StyleSheet, Text } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Mangashio from "../components/Mangashio";
 import { View } from "react-native";
-import { account, hamburger, logo, search } from "../assets";
+import { account, hamburger, logo, search, searchImg } from "../assets";
 import { white } from "../colors";
 
-export default function CustomHeader() {
+export default function CustomHeader(props) {
+    const { onSearch, onAccount, onHamburger } = props;
   return (
     <View style={styles.header}>
       <View style={styles.container}>
+        <TouchableOpacity>
         <Image source={hamburger} />
+        </TouchableOpacity>
+
         <Image source={logo} style={styles.image} />
         <Text style={styles.text}>MangaShio</Text>        
       </View>
 
       <View style={styles.container}>
-        <Image source={search} style={{marginRight: 11}}/>
+        
+        <TouchableOpacity onPress={onSearch}>
+        <Image source={searchImg} style={{marginRight: 11}}/>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={onAccount}>
         <Image source={account}/>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -23,6 +33,7 @@ export default function CustomHeader() {
 const styles = StyleSheet.create({
   header: {
     width: "100%",
+    // marginTop: 50,
     paddingTop: 11,
     paddingHorizontal: 11,
     flexDirection: "row",
