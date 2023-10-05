@@ -1,9 +1,20 @@
-import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from "react-native";
-import { black, white } from "../colors";
 import {
+  Image,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { black, lightGray, midGray, white } from "../colors";
+import {
+  close,
   leftArrow,
   nextArrow,
   rightArrow,
+  searchItem,
+  searchItemImg,
   thumbnail1,
   thumbnail2,
   thumbnail3,
@@ -15,23 +26,62 @@ import CustomHeader from "./CustomHeader";
 import { useState } from "react";
 import { FlatList } from "react-native";
 import Swiper from "react-native-swiper";
+import CustomTextInput from "../components/CustomTextInput";
+import { useNavigation } from "@react-navigation/native";
 
 export default function HomePage() {
+  const navigation = useNavigation();
   const POPULAR_ITEMS = [
     { image: thumbnail1, text: "Ore no Koto ga Daikirai na Imouto ga Kowai" },
     { image: thumbnail2, text: "Solo Levelling" },
     { image: thumbnail3, text: "Some crazy hoe" },
   ];
+  const SEARCH_ITEMS = [
+    {
+      title: "Solo Levelling",
+      rating: 9.54,
+      bookmarks: "6.1k",
+      status: "Ongoing",
+      image: searchItemImg,
+    },
+    {
+      title: "Solo Levelling",
+      rating: 9.54,
+      bookmarks: "6.1k",
+      status: "Ongoing",
+      image: searchItemImg,
+    },
+    {
+      title: "Solo Levelling",
+      rating: 9.54,
+      bookmarks: "6.1k",
+      status: "Ongoing",
+      image: searchItemImg,
+    },
+    {
+      title: "Solo Levelling",
+      rating: 9.54,
+      bookmarks: "6.1k",
+      status: "Ongoing",
+      image: searchItemImg,
+    },
+  ];
 
   const [popularItems, setPopularItems] = useState(POPULAR_ITEMS);
+  const [searchModal, setSearchModal] = useState(false);
 
-  TopSection = () => {
+  const TopSection = () => {
     return (
-      <ImageBackground source={topImage} style={styles.topSection}
-      width={428}
-      height={272}
+      <ImageBackground
+        source={topImage}
+        style={styles.topSection}
+        width={428}
+        height={272}
       >
-        <CustomHeader />
+        <CustomHeader 
+        onSearch={() => setSearchModal(true)}
+        onAccount={() => {navigation.navigate("AccountDetails")}}
+        />
         <View style={{ width: "100%", alignItems: "center" }}>
           <Text style={styles.mainTitle}>Oshi no Ko</Text>
           <CustomButton
@@ -61,12 +111,108 @@ export default function HomePage() {
     );
   };
 
+  const [searchItems, setSearchItems] = useState(SEARCH_ITEMS);
+  const renderSearchItem = ({ item }) => {
+    const { title, rating, bookmarks, status, image } = item;
+
+    return (
+      <View
+        style={{
+          flexDirection: "row",
+          width: "100%",
+          padding: 5,
+          backgroundColor: "rgba(217, 217, 217, 0.75)",
+          marginBottom: 19,
+          borderRadius: 4,
+        }}
+      >
+        <Image
+          source={image}
+          width={66}
+          height={90}
+          style={{ marginRight: 10 }}
+        />
+
+        <View>
+          <Text style={{ fontSize: 24, fontWeight: "500", color: white }}>
+            {title}
+          </Text>
+
+          <View style={{ flexDirection: "row" }}>
+            <Text style={{ fontSize: 10, fontWeight: "400", color: white }}>
+              {rating}
+            </Text>
+            <Text style={{ fontSize: 10, fontWeight: "400", color: white }}>
+              {bookmarks}
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              backgroundColor: lightGray,
+              width: 70,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ fontSize: 10, fontWeight: "400", color: white }}>
+              {status}
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
+  const SearchModal = () => {
+    return (
+      <View
+        style={{
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          zIndex: 1,
+          top: 0,
+          backgroundColor: "rgba(31, 31, 31, 0.8)",
+          // back
+          paddingTop: 10,
+          alignItems: "center",
+          paddingHorizontal: 10,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <CustomTextInput
+            placeholder="Enter a search query..."
+            inputStyle={{
+              fontSize: 14,
+              fontWeight: "400",
+              fontFamily: "Roboto",
+            }}
+            search={true}
+          />
+          <TouchableOpacity onPress={() => setSearchModal(false)}>
+            <Image source={close} />
+          </TouchableOpacity>
+        </View>
+        <FlatList
+          style={{ width: "100%", marginTop: 40 }}
+          data={searchItems}
+          renderItem={renderSearchItem}
+        />
+      </View>
+    );
+  };
+
   const renderItem = ({ item }) => {
     const { image, text } = item;
     return (
-      <View
-        style={{ width: 120, alignItems: "flex-start", marginRight: 16 }}
-      >
+      <View style={{ width: 120, alignItems: "flex-start", marginRight: 16 }}>
         <Image source={image} width={120} height={164} resizeMode="cover" />
         <Text style={styles.mangaText}>{text}</Text>
       </View>
@@ -89,24 +235,25 @@ export default function HomePage() {
           </Text>
           <Image source={nextArrow} />
         </View>
-          <FlatList data={items} renderItem={renderItem} horizontal 
-          />
+        <FlatList data={items} renderItem={renderItem} horizontal />
       </View>
     );
   };
   return (
     <View style={styles.container}>
-      <ScrollView style={{width: "100%"}}>
-      <TopSection />
-      <ItemsRow title="Popular" items={popularItems} />
-      <ItemsRow title="Latest Updates" items={popularItems} />
-      <ItemsRow title="Recently Added" items={popularItems} />
+      {searchModal && <SearchModal />}
+      <ScrollView style={{ width: "100%" }}>
+        <TopSection />
+        <ItemsRow title="Popular" items={popularItems} />
+        <ItemsRow title="Latest Updates" items={popularItems} />
+        <ItemsRow title="Recently Added" items={popularItems} />
       </ScrollView>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
+    // marginTop: 50,
     width: "100%",
     height: "100%",
     alignItems: "center",
