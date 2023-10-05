@@ -1,54 +1,67 @@
 import React from "react";
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import { black, gray, lightGray, white } from "../colors";
+import { search, searchImg } from "../assets";
+import { TouchableOpacity } from "react-native";
 
 export default function CustomTextInput(props) {
-  const {placeholder, label, inputStyle, onChangeText, containerStyle, imgSrc, value, inputProps, password} = props;
+  const {
+    placeholder,
+    label,
+    search,
+    inputStyle,
+    onChangeText,
+    containerStyle,
+    imgSrc,
+    value,
+    inputProps,
+    password,
+  } = props;
   return (
-   <View style={styles.outerContainer}>
-       <Text style={styles.label}>
-        {label}
-      </Text>
-     <View style={{ ...styles.container, ...containerStyle }}>
-     {imgSrc && <Image
-        style={styles.image}
-        source={imgSrc}
-      />}
+    <View style={{marginBottom: label ? 12 : 0}}>
+      {label &&  <Text style={styles.label}>{label}</Text>}
+      <View style={{ ...styles.container, ...containerStyle }}>
+        {imgSrc && <Image style={styles.image} source={imgSrc} />}
 
-      <TextInput
-        style={{...styles.input, ...inputStyle}}
-        placeholder={placeholder}
-        placeholderTextColor={black}
-        onChangeText={onChangeText}
-        value={value}
-        {...inputProps}
-        secureTextEntry={password}
-      />
-
-      {password && (
-        <Image
-          style={styles.arrowImage}
-        //   source={require("../assets/AIJadu/SignUpPage/eyeclosedLogo.png")}
+        <TextInput
+          style={{ ...styles.input, ...inputStyle }}
+          placeholder={placeholder}
+          placeholderTextColor={black}
+          onChangeText={onChangeText}
+          value={value}
+          {...inputProps}
+          secureTextEntry={password}
         />
-      )}
-    </View> 
-   </View>
+
+        {password && (
+          <TouchableOpacity>
+            <Image
+              style={styles.arrowImage}
+              //   source={require("../assets/AIJadu/SignUpPage/eyeclosedLogo.png")}
+            />
+          </TouchableOpacity>
+        )}
+
+        {search && (
+          <TouchableOpacity>
+            <Image style={styles.searchImg} source={searchImg} />
+          </TouchableOpacity>
+        )}
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  outerContainer: {
-    // backgroundColor: "red",
-    marginBottom: 12,
-  },
-  container: {
+   container: {
     width: 362,
     height: 34,
     borderRadius: 4,
     backgroundColor: lightGray,
+    justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: "5%",
+    paddingHorizontal: "4%",
   },
   image: {
     flex: 0.1,
@@ -65,4 +78,5 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     marginBottom: 5,
   },
+  searchImg: {},
 });
