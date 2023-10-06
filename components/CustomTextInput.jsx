@@ -16,9 +16,10 @@ export default function CustomTextInput(props) {
     value,
     inputProps,
     password,
+    outerStyle,
   } = props;
   return (
-    <View style={{marginBottom: label ? 12 : 0}}>
+    <View style={[{marginBottom: label ? 12 : 0}, outerStyle]}>
       {label &&  <Text style={styles.label}>{label}</Text>}
       <View style={{ ...styles.container, ...containerStyle }}>
         {imgSrc && <Image style={styles.image} source={imgSrc} />}
@@ -54,7 +55,7 @@ export default function CustomTextInput(props) {
 
 const styles = StyleSheet.create({
    container: {
-    width: 362,
+    width: "100%",
     height: 34,
     borderRadius: 4,
     backgroundColor: lightGray,

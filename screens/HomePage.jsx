@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   Image,
   ImageBackground,
   ScrollView,
@@ -20,6 +21,9 @@ import {
   thumbnail3,
   topImage,
 } from "../assets";
+
+import Constants from "expo-constants";
+
 import CustomButton from "../components/CustomButton";
 import Mangashio from "../components/Mangashio";
 import CustomHeader from "./CustomHeader";
@@ -30,6 +34,8 @@ import CustomTextInput from "../components/CustomTextInput";
 import { useNavigation } from "@react-navigation/native";
 
 export default function HomePage() {
+  const win = Dimensions.get("window");
+  const ratio = win.width / 428;
   const navigation = useNavigation();
   const POPULAR_ITEMS = [
     { image: thumbnail1, text: "Ore no Koto ga Daikirai na Imouto ga Kowai" },
@@ -74,9 +80,13 @@ export default function HomePage() {
     return (
       <ImageBackground
         source={topImage}
-        style={styles.topSection}
-        width={428}
-        height={272}
+        style={{
+          width: "100%",
+          height: 272 * ratio,
+          flexShrink: 0,
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
         <CustomHeader 
         onSearch={() => setSearchModal(true)}
@@ -168,12 +178,11 @@ export default function HomePage() {
       <View
         style={{
           width: "100%",
-          height: "100%",
+          height: win.height,
           position: "absolute",
           zIndex: 1,
-          top: 0,
           backgroundColor: "rgba(31, 31, 31, 0.8)",
-          // back
+          marginTop: Constants.statusBarHeight,
           paddingTop: 10,
           alignItems: "center",
           paddingHorizontal: 10,
@@ -194,6 +203,7 @@ export default function HomePage() {
               fontWeight: "400",
               fontFamily: "Roboto",
             }}
+            outerStyle={{ flex: 0.98 }}
             search={true}
           />
           <TouchableOpacity onPress={() => setSearchModal(false)}>
@@ -253,18 +263,10 @@ export default function HomePage() {
 }
 const styles = StyleSheet.create({
   container: {
-    // marginTop: 50,
+    paddingTop: Constants.statusBarHeight,
     width: "100%",
-    height: "100%",
     alignItems: "center",
     backgroundColor: black,
-  },
-  topSection: {
-    width: "100%",
-    height: 272,
-    flexShrink: 0,
-    justifyContent: "space-between",
-    alignItems: "center",
   },
   mainTitle: {
     color: white,

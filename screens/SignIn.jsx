@@ -20,6 +20,7 @@ export default function SignIn() {
         <CustomTextInput
           label="Username/email"
           onChangeText={(text) => setUsername(text)}
+          outerStyle={{ width: "100%" }}
         />
         <View
           style={{
@@ -41,6 +42,7 @@ export default function SignIn() {
           label="Password"
           password={true}
           onChangeText={(text) => setPassword(text)}
+          outerStyle={{ width: "100%" }}
         />
 
         <View
@@ -81,7 +83,10 @@ export default function SignIn() {
           </TouchableOpacity>
         </View>
 
-        <CustomButton text="Log in" buttonStyle={{ marginTop: 35 }} />
+        <CustomButton
+          text="Log in"
+          buttonStyle={{ width: "100%", marginTop: 35 }}
+        />
       </View>
     </View>
   );
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     alignItems: "center",
     backgroundColor: gray,
-    width: 386,
+    width: "90%",
     height: 400,
     borderRadius: 3,
   },

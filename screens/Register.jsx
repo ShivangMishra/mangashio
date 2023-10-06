@@ -6,11 +6,10 @@ import CustomButton from "../components/CustomButton";
 import { useState } from "react";
 
 export default function Register() {
-
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassowrd, setConfirmPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassowrd, setConfirmPassword] = useState("");
   return (
     <View style={styles.container}>
       <Mangashio />
@@ -19,26 +18,42 @@ export default function Register() {
         <CustomTextInput
           label="Username"
           onChangeText={(text) => setUsername(text)}
+          outerStyle={{ width: "100%" }}
         />
         <CustomTextInput
           label="Email"
           onChangeText={(text) => setEmail(text)}
+          outerStyle={{ width: "100%" }}
         />
         <CustomTextInput
           label="Password"
           password={true}
           onChangeText={(text) => setPassword(text)}
+          outerStyle={{ width: "100%" }}
         />
         <CustomTextInput
           label="Confirm Password"
           password={true}
           onChangeText={(text) => setConfirmPassword(text)}
+          outerStyle={{ width: "100%" }}
         />
 
-        <CustomButton text="Register" buttonStyle={{ marginTop: 65 }} />
-        <TouchableOpacity>
-          <Text style={styles.linkText}>Login page</Text>
-        </TouchableOpacity>
+        <View
+          style={{
+            width: "100%",
+            alignItems: "center",
+            // alignSelf: "flex-end",
+            // position: "relative",
+            // bottom: 0,
+            flex: 0.9,
+            justifyContent: "flex-end",
+          }}
+        >
+          <CustomButton text="Register" buttonStyle={{ width: "100%" }} />
+          <TouchableOpacity>
+            <Text style={styles.linkText}>Login page</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -48,7 +63,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
-    paddingTop: 150,
+    paddingTop: "38%",
     backgroundColor: black,
     alignItems: "center",
   },
@@ -56,8 +71,9 @@ const styles = StyleSheet.create({
     marginTop: 30,
     alignItems: "center",
     backgroundColor: gray,
-    width: 386,
-    height: 503,
+    width: "90%",
+    paddingHorizontal: "2.5%",
+    height: "65%",
     borderRadius: 3,
   },
   headingText: {
@@ -65,7 +81,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: white,
     marginTop: 15,
-    marginBottom: 30,
+    marginBottom: "5%",
   },
   linkText: {
     color: linkColor,

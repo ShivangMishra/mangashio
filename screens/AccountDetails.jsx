@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import { black, gray, midGray, white } from "../colors";
 import { ImageBackground } from "react-native";
 import { coverPic, profilePic } from "../assets";
@@ -8,10 +8,22 @@ import CustomButton from "../components/CustomButton";
 import { ScrollView } from "react-native";
 
 export default function AccountDetails() {
+  const win = Dimensions.get("window");
+  const ratio = win.width / 428;
   const ProfilePic = () => {
     return (
       <TouchableOpacity style={{ alignItems: "center" }}>
-        <Image source={profilePic} style={styles.profilePic} />
+        <Image
+          source={profilePic}
+          resizeMode="cover"
+          style={{
+            position: "absolute",
+            top: 100 * ratio,
+            width: 130,
+            height: 130,
+            borderRadius: 100,
+          }}
+        />
       </TouchableOpacity>
     );
   };
@@ -63,7 +75,7 @@ export default function AccountDetails() {
 
   const Subscriptions = () => {
     return (
-      <View style={[styles.section, {marginBottom: 0}]}>
+      <View style={[styles.section, { marginBottom: 10 }]}>
         <Text style={styles.title}>Subscriptions</Text>
         <View style={styles.subsContainer}>
           <View style={styles.sub}>
@@ -88,10 +100,19 @@ export default function AccountDetails() {
 
   return (
     <ScrollView style={styles.container}>
-      <ImageBackground
+      <Image
         resizeMode="cover"
         source={coverPic}
-        style={styles.coverPic}
+        style={{
+          // width: "100%",
+          width: win.width,
+          height: 197 * ratio,
+          resizeMode: "cover",
+          width: "100%",
+          opacity: 0.5,
+          position: "absolute",
+          top: 0,
+        }}
       />
       <ProfilePic />
       <Text style={styles.username}>Gangmember420</Text>
@@ -109,17 +130,6 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: black,
     // alignItems: "center",
-  },
-  coverPic: {
-    width: "100%",
-    height: 197,
-    opacity: 0.5,
-    position: "absolute",
-    top: 0,
-  },
-  profilePic: {
-    position: "absolute",
-    top: 100,
   },
   username: {
     position: "absolute",
