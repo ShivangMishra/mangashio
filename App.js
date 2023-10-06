@@ -13,8 +13,9 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <>
-      <StatusBar style="light" />
       <NavigationContainer>
+
+      <StatusBar style="light" />
           <Stack.Navigator>
           <Stack.Screen
               name="Navigation"
