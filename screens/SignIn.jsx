@@ -6,7 +6,8 @@ import CustomButton from "../components/CustomButton";
 import { useState } from "react";
 import Checkbox from "expo-checkbox";
 
-export default function SignIn() {
+export default function SignIn(props) {
+  const { navigation } = props;
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +33,7 @@ export default function SignIn() {
           }}
         >
           <Text style={styles.newUserText}>New user?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
             <Text style={[styles.newUserText, { color: linkColor }]}>
               {" Register here"}
             </Text>

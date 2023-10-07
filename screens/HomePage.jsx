@@ -21,11 +21,9 @@ import {
   thumbnail3,
   topImage,
 } from "../assets";
-
 import Constants from "expo-constants";
 
 import CustomButton from "../components/CustomButton";
-import Mangashio from "../components/Mangashio";
 import CustomHeader from "./CustomHeader";
 import { useState } from "react";
 import { FlatList } from "react-native";
@@ -33,10 +31,9 @@ import Swiper from "react-native-swiper";
 import CustomTextInput from "../components/CustomTextInput";
 import { useNavigation } from "@react-navigation/native";
 
-export default function HomePage() {
+export default function HomePage({navigation}) {
   const win = Dimensions.get("window");
   const ratio = win.width / 428;
-  const navigation = useNavigation();
   const POPULAR_ITEMS = [
     { image: thumbnail1, text: "Ore no Koto ga Daikirai na Imouto ga Kowai" },
     { image: thumbnail2, text: "Solo Levelling" },
@@ -91,6 +88,7 @@ export default function HomePage() {
         <CustomHeader 
         onSearch={() => setSearchModal(true)}
         onAccount={() => {navigation.navigate("AccountDetails")}}
+        onHamburger={() => {navigation.openDrawer()}}
         />
         <View style={{ width: "100%", alignItems: "center" }}>
           <Text style={styles.mainTitle}>Oshi no Ko</Text>
@@ -251,6 +249,8 @@ export default function HomePage() {
   };
   return (
     <View style={styles.container}>
+      {/* <Drawer/> */}
+      
       {searchModal && <SearchModal />}
       <ScrollView style={{ width: "100%" }}>
         <TopSection />

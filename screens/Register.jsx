@@ -5,7 +5,7 @@ import CustomTextInput from "../components/CustomTextInput";
 import CustomButton from "../components/CustomButton";
 import { useState } from "react";
 
-export default function Register() {
+export default function Register({ navigation}) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,8 +49,10 @@ export default function Register() {
             justifyContent: "flex-end",
           }}
         >
-          <CustomButton text="Register" buttonStyle={{ width: "100%" }} />
-          <TouchableOpacity>
+          <CustomButton text="Register" buttonStyle={{ width: "100%" }} 
+            onPress={()=>navigation.navigate("Drawer")}
+          />
+          <TouchableOpacity onPress={()=>navigation.navigate("SignIn")}>
             <Text style={styles.linkText}>Login page</Text>
           </TouchableOpacity>
         </View>

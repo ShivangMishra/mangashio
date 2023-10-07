@@ -9,7 +9,7 @@ export default function CustomHeader(props) {
   return (
     <View style={styles.header}>
       <View style={styles.container}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onHamburger}>
         <Image source={hamburger} />
         </TouchableOpacity>
 

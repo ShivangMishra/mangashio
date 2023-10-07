@@ -1,14 +1,15 @@
 {
   "expo": {
     "androidStatusBar": {
-      "backgroundColor": "#ffffff",
-      "translucent": false
+      "backgroundColor": "#000000",
+      "translucent": false,
+      "hidden": false
     },
     "name": "mangashio",
     "slug": "mangashio",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -23,7 +24,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.mangashio"
@@ -35,6 +36,9 @@
       "eas": {
         "projectId": "2366c5c3-dc21-4a68-bc55-7c56ca0ae061"
       }
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
