@@ -5,7 +5,7 @@ import CustomTextInput from "../components/CustomTextInput";
 import CustomButton from "../components/CustomButton";
 import { useState } from "react";
 
-export default function Register({ navigation}) {
+export default function Register({ navigation }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,10 +49,14 @@ export default function Register({ navigation}) {
             justifyContent: "flex-end",
           }}
         >
-          <CustomButton text="Register" buttonStyle={{ width: "100%" }} 
-            onPress={()=>navigation.navigate("Drawer")}
+          <CustomButton
+            text="Register"
+            buttonStyle={{ width: "100%" }}
+            onPress={() => {
+              alert("Register - API not integrated yet.");
+            }}
           />
-          <TouchableOpacity onPress={()=>navigation.navigate("SignIn")}>
+          <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
             <Text style={styles.linkText}>Login page</Text>
           </TouchableOpacity>
         </View>

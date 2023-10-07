@@ -86,6 +86,9 @@ export default function SignIn(props) {
 
         <CustomButton
           text="Log in"
+          onPress={() => {
+            navigation.navigate("Drawer");
+          }}
           buttonStyle={{ width: "100%", marginTop: 35 }}
         />
       </View>

@@ -18,3 +18,5 @@ export const thumbnail3 = require('./assets/thumbnails/3.png');
 
 export const close = require('./assets/close.png');
 export const searchItemImg = require('./assets/search-item.png');
+export const starImg = require('./assets/star.png');
+export const bookmark = require("./assets/bookmark.png");
